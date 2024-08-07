@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.example";
+
+service UserService {
+  rpc CreateUser(UserCreateRequest) returns (UserResponse) {};
+  rpc GetUserById(UserGetRequest) returns (UserResponse) {};
+}
+
+message UserCreateRequest {
+  string firstName = 1;
+  string lastName = 2;
+  string email = 3;
+}
+
+message UserGetRequest {
+  int64 userId = 1;
+}
+
+message UserResponse {
+  int64 userId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+}
+
+service TicketBookingService {
+  rpc BookTicket(TicketRequest) returns (TicketResponse) {};
+  rpc GetUserTickets(UserTicketRequest) returns (UserTicketResponse) {};
+  rpc GetAllTickets(Empty) returns (AllTicketResponse) {};
+  rpc ModifySeat(SeatModifyRequest) returns (TicketResponse){};
+  rpc RemoveUser(RemoveUserRequest) returns (RemovedUserSeatResponse) {};
+}
+
+message Empty {}
+
+message UserTicketRequest {
+  int64 userId = 1;
+}
+
+message UserTicketResponse {
+  repeated TicketResponse ticketResponse = 1;
+}
+
+message AllTicketResponse {
+  repeated TicketResponse ticketResponse = 1;
+}
+
+message TicketRequest {
+  int64 userId = 1;
+  string fromLocation = 2;
+  string toLocation = 3;
+  string section = 4;
+  double price = 5;
+}
+
+message TicketResponse {
+  int64 userId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string fromLocation = 5;
+  string toLocation = 6;
+  string section = 7;
+  double price = 8;
+  int32 seatId = 9;
+  int64 ticketId = 10;
+}
+
+message SeatModifyRequest {
+  int64 userId = 1;
+  int64 ticketId = 2;
+  int32 seatId = 3;
+  int32 modifiedSeatId = 4;
+}
+
+message RemoveUserRequest {
+  int64 userId = 1;
+}
+
+message RemovedUserSeatResponse {
+  repeated TicketResponse ticketResponse = 1;
+}
