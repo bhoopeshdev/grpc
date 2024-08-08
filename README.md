@@ -11,3 +11,8 @@ steps to initiate server:
 - run "mvn spring-boot:run"
 
 server will be listening on localhost with port 6565
+
+## grpc client
+
+- open src/main/java/client in VScode/IntelliJ or any other code editor
+- run Main java class
